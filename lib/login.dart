@@ -1,11 +1,26 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_project/decorations.dart';
 import 'package:flutter_project/signup.dart';
+import 'package:flutter_project/homecust.dart';
+import 'package:flutter_project/services/auth.dart';
 
 class Login extends StatefulWidget {
+
+  final Function toggleView;
+  Login({ this.toggleView });
+
   @override
   _LoginState createState() => _LoginState();
 }
+
+final AuthService _auth = AuthService();
+  final _formKey = GlobalKey<FormState>();
+  String error = '';
+  bool loading = false;
+
+  // text field state
+  String email = '';
+  String password = '';
 
 class _LoginState extends State<Login> {
   @override
@@ -20,14 +35,23 @@ class _LoginState extends State<Login> {
       body: Container(
           padding: EdgeInsets.symmetric(vertical: 20.0, horizontal: 50.0),
           child: Form(
+            key: _formKey,
             child: Column(children: <Widget>[
               SizedBox(height: 20.0),
               TextFormField(
                 decoration: textDecoration.copyWith(hintText: 'Email'),
+                validator: (val) => val.isEmpty ? 'Enter an email' : null,
+                onChanged: (val) {
+                  setState(() => email = val);
+                },
               ),
               SizedBox(height: 20.0),
               TextFormField(
                 decoration: textDecoration.copyWith(hintText: 'Password'),
+                validator: (val) => val.length < 6 ? 'Enter a password 6+ chars long' : null,
+                onChanged: (val) {
+                  setState(() => password = val);
+                },
               ),
               SizedBox(height: 20.0),
               RaisedButton(
@@ -39,9 +63,19 @@ class _LoginState extends State<Login> {
                     'Login',
                     style: TextStyle(color: Colors.white),
                   ),
-                  onPressed: () {
+                  onPressed: () async{
+                    if(_formKey.currentState.validate()){
+                    setState(() => loading = true);
+                    dynamic result = await _auth.signInWithEmailAndPassword(email, password);
                     Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => Login()));
+                        MaterialPageRoute(builder: (context) => PageOne()));
+                    if(result == null) {
+                      setState(() {
+                        loading = false;
+                        error = 'Could not sign in with those credentials';
+                      });
+                    }
+                  }
                   }),
               Container(
                 child: InkWell(
