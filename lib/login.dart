@@ -67,8 +67,6 @@ class _LoginState extends State<Login> {
                     if(_formKey.currentState.validate()){
                     setState(() => loading = true);
                     dynamic result = await _auth.signInWithEmailAndPassword(email, password);
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => PageOne()));
                     if(result == null) {
                       setState(() {
                         loading = false;
