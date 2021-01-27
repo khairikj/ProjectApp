@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_project/acccust.dart';
 import 'package:flutter_project/historycust.dart';
 import 'package:flutter_project/homecust.dart';
-import 'package:flutter_project/login.dart';
+import 'package:flutter_project/services/auth.dart';
+
 
 class Nav extends StatefulWidget {
   @override
@@ -22,6 +23,8 @@ class _NavState extends State<Nav> {
       _selectedIndex = index;
     });
   }
+
+  final AuthService _auth = AuthService();
 
   @override
   Widget build(BuildContext context) {
@@ -45,9 +48,8 @@ class _NavState extends State<Nav> {
         ListTile(
           leading: Icon(Icons.logout),
           title: Text('Logout'),
-          onTap: () {
-            Navigator.push(
-                context, MaterialPageRoute(builder: (context) => Login()));
+          onTap: () async{
+                await _auth.signOut();
           },
         ),
       ])),
