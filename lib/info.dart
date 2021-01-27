@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_project/decorations.dart';
-import 'package:flutter_project/login.dart';
+import 'package:flutter_project/nav.dart';
 
 class Info extends StatefulWidget {
   @override
   _InfoState createState() => _InfoState();
+
 }
 
 class _InfoState extends State<Info> {
@@ -81,7 +82,7 @@ class _InfoState extends State<Info> {
                   ),
                   onPressed: () {
                     Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => Login()));
+                        MaterialPageRoute(builder: (context) => Nav()));
                   }),
             ]))));
   }

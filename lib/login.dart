@@ -47,6 +47,7 @@ class _LoginState extends State<Login> {
               ),
               SizedBox(height: 20.0),
               TextFormField(
+                obscureText: true,
                 decoration: textDecoration.copyWith(hintText: 'Password'),
                 validator: (val) => val.length < 6 ? 'Enter a password 6+ chars long' : null,
                 onChanged: (val) {
@@ -79,8 +80,7 @@ class _LoginState extends State<Login> {
                 child: InkWell(
                     child: new Text('Click here to SIGN UP'),
                     onTap: () {
-                      Navigator.push(context,
-                          MaterialPageRoute(builder: (context) => SignUp()));
+                      widget.toggleView();
                     }),
               ),
             ]),

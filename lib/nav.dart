@@ -3,11 +3,16 @@ import 'package:flutter_project/acccust.dart';
 import 'package:flutter_project/historycust.dart';
 import 'package:flutter_project/homecust.dart';
 import 'package:flutter_project/services/auth.dart';
+import 'package:flutter_project/info.dart';
 
 
 class Nav extends StatefulWidget {
   @override
   _NavState createState() => _NavState();
+
+  final Function toggleView;
+  Nav({ this.toggleView });
+
 }
 
 class _NavState extends State<Nav> {
@@ -43,7 +48,10 @@ class _NavState extends State<Nav> {
         ListTile(
           leading: Icon(Icons.edit),
           title: Text('Edit account info'),
-          onTap: null,
+          onTap: () {
+            Navigator.push(context,
+              MaterialPageRoute(builder: (context) => Info()));
+          },
         ),
         ListTile(
           leading: Icon(Icons.logout),

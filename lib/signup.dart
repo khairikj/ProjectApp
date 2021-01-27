@@ -128,8 +128,7 @@ class _SignUpState extends State<SignUp> {
                     child: new Text(
                         'Already have an account? Click here to LOGIN'),
                     onTap: () {
-                      Navigator.push(context,
-                          MaterialPageRoute(builder: (context) => Login()));
+                      widget.toggleView();
                     }),
               ),
             ],
