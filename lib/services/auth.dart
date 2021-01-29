@@ -36,8 +36,7 @@ class AuthService {
       FirebaseUser user = result.user;
 
       //create a new document for the user with the uid
-      await DatabaseService(uid: user.uid).updateUserData('0', 'new crew member', 100);
-      return user;
+      return _userFromFirebaseUser(user);
     } catch(e){
       print(e.toString());
       return null;
@@ -50,6 +49,7 @@ class AuthService {
       AuthResult result = await _auth.createUserWithEmailAndPassword(email: email, password: password);
       FirebaseUser user = result.user;
 
+      await DatabaseService(uid: user.uid).updateUserData('New user', '0000000000', 'Location', 0);
       return _userFromFirebaseUser(user);
     } catch(e){
       print(e.toString());

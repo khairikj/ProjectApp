@@ -1,9 +1,16 @@
-class Brew {
-
+class CustData {
   final String name;
-  final String sugars;
-  final int strength;
+  final String phoneNum;
+  final String address;
+  final String userType;
 
-  Brew({this.name,this.sugars,this.strength});
+  CustData({this.name, this.phoneNum, this.address, this.userType, String uid});
+}
 
+class UpdData {
+  final String names;
+  final String phoneNums;
+  final String addresses;
+
+  UpdData({this.names, this.phoneNums, this.addresses});
 }
